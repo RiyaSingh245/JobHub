@@ -7,4 +7,11 @@ class SignUpNotifier extends ChangeNotifier {
     _obscureText = newState;
     notifyListeners();
   }
+
+  bool passwordValidator(String password) {
+    if(password.isEmpty) return false;
+    String pattern = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*[!@#\$&*~]).{8,}$';
+    RegExp regex = RegExp(pattern);
+    return regex.hasMatch(password);
+  }
 }

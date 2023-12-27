@@ -11,6 +11,7 @@ import 'package:job_hub/views/common/custom_textfield.dart';
 import 'package:job_hub/views/common/height_spacer.dart';
 import 'package:job_hub/views/common/reusable_text.dart';
 import 'package:job_hub/views/ui/auth/signup.dart';
+import 'package:job_hub/views/ui/mainscreen.dart';
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
@@ -114,10 +115,10 @@ class _LoginPageState extends State<LoginPage> {
                   alignment: Alignment.centerRight,
                   child: GestureDetector(
                     onTap: () {
-                      Get.to(() => const LoginPage());
+                      Get.to(() => const RegistrationPage());
                     },
                     child: ReusableText(
-                      text: "Login",
+                      text: "Register",
                       style: appstyle(
                         14,
                         Color(kDark.value),
@@ -128,8 +129,10 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const HeightSpacer(size: 50),
                 CustomButton(
-                  onTap: () {},
-                  text: "Sign Up",
+                  onTap: () {
+                    Get.to(() => const MainScreen());
+                  },
+                  text: "Login",
                 ),
               ],
             ),

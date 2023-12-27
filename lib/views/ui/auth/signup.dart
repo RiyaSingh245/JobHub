@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:job_hub/views/ui/auth/login.dart';
 import 'package:provider/provider.dart';
 import '../../../constants/app_constants.dart';
 import '../../../controllers/signup_provider.dart';
@@ -105,11 +106,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   keyboardType: TextInputType.text,
                   obscureText: signupNotifier.obscureText,
                   validator: (password) {
-                    if (password!.isEmpty || password.length < 7) {
-                      return "Please enter a valid password";
-                    } else {
-                      return null;
+                    if(signupNotifier.passwordValidator(password??'')){
+                      return "Please enter a valid password with at least one uppercase, one lowercase, one digit and a special character and length of characters atleast 8";
                     }
+                    return null;
                   },
                   suffixIcon: GestureDetector(
                     onTap: () {
@@ -128,10 +128,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   alignment: Alignment.centerRight,
                   child: GestureDetector(
                     onTap: () {
-                      Get.to(() => const RegistrationPage());
+                      Get.to(() => const LoginPage());
                     },
                     child: ReusableText(
-                      text: "Register",
+                      text: "Login",
                       style: appstyle(
                         14,
                         Color(kDark.value),
@@ -143,7 +143,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 const HeightSpacer(size: 50),
                 CustomButton(
                   onTap: () {},
-                  text: "Login",
+                  text: "Sign Up",
                 ),
               ],
             ),

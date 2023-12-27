@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:job_hub/constants/app_constants.dart';
 import 'package:job_hub/views/common/app_style.dart';
-import 'package:job_hub/views/common/exports.dart';
 import 'package:job_hub/views/common/reusable_text.dart';
 import 'package:job_hub/views/ui/onboarding/widgets/page_one.dart';
 import 'package:job_hub/views/ui/onboarding/widgets/page_three.dart';
