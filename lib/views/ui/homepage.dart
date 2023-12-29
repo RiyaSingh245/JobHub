@@ -5,8 +5,12 @@ import 'package:job_hub/constants/app_constants.dart';
 import 'package:job_hub/views/common/app_bar.dart';
 import 'package:job_hub/views/common/app_style.dart';
 import 'package:job_hub/views/common/drawer/drawer_widget.dart';
+import 'package:job_hub/views/common/heading_widget.dart';
 import 'package:job_hub/views/common/height_spacer.dart';
 import 'package:job_hub/views/common/search.dart';
+import 'package:job_hub/views/common/vertical_tile.dart';
+import 'package:job_hub/views/ui/jobs/job_page.dart';
+import 'package:job_hub/views/ui/jobs/widgets/horizontal_tile.dart';
 import 'package:job_hub/views/ui/search/searchpage.dart';
 
 class HomePage extends StatefulWidget {
@@ -49,6 +53,37 @@ class _HomePageState extends State<HomePage> {
                   onTap: () {
                     Get.to(()=> const SearchPage());
                   },
+                ),
+                const HeightSpacer(size: 30),
+                HeadingWidget(
+                  text: "Popular Jobs",
+                  onTap: () {},
+                ),
+
+                const HeightSpacer(size: 15),
+
+                SizedBox(
+                  height: hieght*0.28,
+                  child: ListView.builder(
+                    itemCount: 4,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return JobHorizontalTile(
+                        onTap: () {
+                          Get.to(() => const JobPage(title: 'Facebook', id: '12',));
+                        },
+                      );
+                    }
+                    ),
+                ),
+                const HeightSpacer(size: 15),
+                HeadingWidget(
+                  text: "Recently Posted",
+                  onTap: () {},
+                ),
+                const HeightSpacer(size: 15),
+                VerticalTile(
+                  onTap: () {},
                 ),
               ],
             ),
