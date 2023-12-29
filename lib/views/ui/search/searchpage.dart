@@ -35,18 +35,26 @@ class _SearchPageState extends State<SearchPage> {
           ),
           elevation: 0,
       ),
-      body: Center(
-        child: Padding(
-          padding: EdgeInsets.all(20.h),
-          child: Column(
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 180.h),
+        child: Column(
             children: [
               Image.asset("assets/images/optimized_search.png"),
               ReusableText(text: "Start Searching For Jobs", 
               style: appstyle(24, Color(kDark.value), FontWeight.bold)),
             ],
           ),
-        ),
       ),
+      /*body: Padding(
+        padding: EdgeInsets.all(40.h),
+        child: Column(
+          children: [
+            Image.asset("assets/images/optimized_search.png"),
+            ReusableText(text: "Start Searching For Jobs", 
+            style: appstyle(24, Color(kDark.value), FontWeight.bold)),
+          ],
+        ),
+      ),*/
     );
   }
 }
