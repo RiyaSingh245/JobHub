@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:job_hub/constants/app_constants.dart';
+import 'package:job_hub/views/common/app_style.dart';
+import 'package:job_hub/views/common/reusable_text.dart';
+import 'package:job_hub/views/ui/search/widgets/custom_field.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -8,8 +14,37 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+  TextEditingController search = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(kOrange.value),
+        iconTheme: IconThemeData(color: Color(kLight.value),),
+        title: CustomField(
+          hintText: "Search for a job", 
+          controller: search,
+          suffixIcon: GestureDetector(
+            onTap: () {
+              setState(() {
+                
+              });
+            },
+            child: const Icon(AntDesign.search1),
+          ),
+          ),
+          elevation: 0,
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(20.h),
+        child: Column(
+          children: [
+            Image.asset("assets/images/optimized_search.png"),
+            ReusableText(text: "Start Searching For Jobs", 
+            style: appstyle(24, Color(kDark.value), FontWeight.bold)),
+          ],
+        ),
+      ),
+    );
   }
 }
