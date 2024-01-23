@@ -4,11 +4,28 @@ import 'package:get/get.dart';
 import 'package:job_hub/constants/app_constants.dart';
 import 'package:job_hub/controllers/exports.dart';
 import 'package:job_hub/controllers/zoom_provider.dart';
+import 'package:job_hub/views/ui/auth/login.dart';
+import 'package:job_hub/views/ui/mainscreen.dart';
 import 'package:provider/provider.dart';
 import 'package:job_hub/views/ui/onboarding/onboarding_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+
+Widget defaultHome = const OnBoardingScreen();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  final entrypoint = prefs.getBool('entrypoint') ?? false;
+  final loggedIn = prefs.getBool('loggedIn') ?? false;
+
+  if(entrypoint & !loggedIn) {
+    defaultHome = const LoginPage(); 
+  } else if (entrypoint && loggedIn) {
+    defaultHome = const MainScreen();
+  }
 
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (context) => OnBoardNotifier()),
@@ -43,10 +60,8 @@ class MyApp extends StatelessWidget {
               iconTheme: IconThemeData(color: Color(kDark.value)),
               primarySwatch: Colors.grey,
             ),
-            home: const OnBoardingScreen(),
+            home: defaultHome,
           );
         });
   }
 }
-
-
