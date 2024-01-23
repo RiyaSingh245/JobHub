@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "243745432635",
+    "project_id": "job-find-search",
+    "storage_bucket": "job-find-search.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:243745432635:android:cfe68a4654a0401c31a81e",
+        "android_client_info": {
+          "package_name": "com.example.job_hub"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2zm1TsCNpgBY7LjYDf4DcLBbQuAFaO4s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

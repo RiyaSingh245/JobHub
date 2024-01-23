@@ -1,7 +1,7 @@
-/*import 'dart:io';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
+//import 'package:get/get.dart';
 import 'package:job_hub/constants/app_constants.dart';
 import 'package:job_hub/controllers/exports.dart';
 import 'package:job_hub/views/common/app_style.dart';
@@ -197,7 +197,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                         builder: (context, imageUpload, child) {
                           return CustomButton(
                             onTap: () {
-                              if(imageUpload.imageUrl.isEmpty && imageUpload.imageFil == null) {
+                              /*if(imageUpload.imageUrl.isEmpty /*&& imageUpload._imageFile == null*/) {
                                 Get.snackbar(
                                   "Image Missing", "Please Upload an image to proceed",
                                   colorText: Color(kLight.value),
@@ -206,7 +206,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                                 );
                               } else {
                                 //ProfileUpdateReq model = 
-                              }
+                              }*/
                             },
                             text: "Update Profile");
                         }, 
@@ -220,4 +220,4 @@ class _PersonalDetailsState extends State<PersonalDetails> {
       ),
     );
   }
-}*/
+}

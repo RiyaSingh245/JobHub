@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:job_hub/controllers/exports.dart';
 import 'package:job_hub/views/ui/auth/login.dart';
 import 'package:provider/provider.dart';
 import '../../../constants/app_constants.dart';
@@ -35,6 +36,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
   @override
   Widget build(BuildContext context) {
+    var loginNotifier = Provider.of<LoginNotifier>(context);
     return Consumer<SignUpNotifier>(
       builder: (context, signupNotifier, child) {
         return Scaffold(
@@ -142,7 +144,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 ),
                 const HeightSpacer(size: 50),
                 CustomButton(
-                  onTap: () {},
+                  onTap: () {
+                    loginNotifier.firstTime = !loginNotifier.firstTime;
+                  },
                   text: "Sign Up",
                 ),
               ],
