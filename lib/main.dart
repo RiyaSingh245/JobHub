@@ -7,7 +7,6 @@ import 'package:job_hub/controllers/exports.dart';
 import 'package:job_hub/controllers/zoom_provider.dart';
 import 'package:job_hub/firebase_options.dart';
 import 'package:job_hub/views/ui/auth/login.dart';
-import 'package:job_hub/views/ui/auth/update_user.dart';
 import 'package:job_hub/views/ui/mainscreen.dart';
 import 'package:provider/provider.dart';
 import 'package:job_hub/views/ui/onboarding/onboarding_screen.dart';
@@ -66,7 +65,7 @@ class MyApp extends StatelessWidget {
               iconTheme: IconThemeData(color: Color(kDark.value)),
               primarySwatch: Colors.grey,
             ),
-            home: const PersonalDetails(),
+            home: defaultHome,
           );
         });
   }

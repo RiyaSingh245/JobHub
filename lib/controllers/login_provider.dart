@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_hub/constants/app_constants.dart';
 import 'package:job_hub/models/request/auth/login_model.dart';
+import 'package:job_hub/models/request/auth/profile_update_model.dart';
 import 'package:job_hub/services/helpers/auth_helper.dart';
 import 'package:job_hub/views/ui/auth/update_user.dart';
 import 'package:job_hub/views/ui/mainscreen.dart';
@@ -73,7 +74,7 @@ class LoginNotifier extends ChangeNotifier {
       } else if(response && !firstTime) {
         Get.off(() => const MainScreen());
       } else if(!response) {
-        Get.snackbar("Sign Failed", "Please check your credentials",
+        Get.snackbar("Login Failed", "Please check your credentials",
           colorText: Color(kLight.value),
           backgroundColor: Colors.red,
           icon: const Icon(Icons.add_alert)
@@ -87,5 +88,25 @@ class LoginNotifier extends ChangeNotifier {
     await prefs.setBool('loggedIn', false);
     await prefs.remove('token');
     _firstTime = false;
+  }
+
+  updateProfile(ProfileUpdateReq model) async {
+    AuthHelper.updateProfile(model).then((response) {
+      if (response) {
+        Get.snackbar("Profile Update", "Enjoy your search for a job",
+            colorText: Color(kLight.value),
+            backgroundColor: Color(kLightBlue.value),
+            icon: const Icon(Icons.add_alert));
+
+        Future.delayed(const Duration(seconds: 3)).then((value) {
+          Get.offAll(() => const MainScreen());
+        });
+      } else {
+        Get.snackbar("Updating Failed", "Please try again",
+            colorText: Color(kLight.value),
+            backgroundColor: Color(kOrange.value),
+            icon: const Icon(Icons.add_alert));
+      }
+    });
   }
 }

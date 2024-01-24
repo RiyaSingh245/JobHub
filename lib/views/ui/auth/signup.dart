@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:job_hub/controllers/exports.dart';
+import 'package:job_hub/models/request/auth/signup_model.dart';
 import 'package:job_hub/views/ui/auth/login.dart';
 import 'package:provider/provider.dart';
 import '../../../constants/app_constants.dart';
@@ -108,14 +109,15 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   keyboardType: TextInputType.text,
                   obscureText: signupNotifier.obscureText,
                   validator: (password) {
-                    if(signupNotifier.passwordValidator(password??'')){
+                    if (password!.isEmpty || password.length < 8) {
                       return "Please enter a valid password with at least one uppercase, one lowercase, one digit and a special character and length of characters atleast 8";
                     }
                     return null;
                   },
                   suffixIcon: GestureDetector(
                     onTap: () {
-                      signupNotifier.obscureText = !signupNotifier.obscureText;
+                      signupNotifier.obscureText =
+                          !signupNotifier.obscureText;
                     },
                     child: Icon(
                       signupNotifier.obscureText
@@ -130,7 +132,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   alignment: Alignment.centerRight,
                   child: GestureDetector(
                     onTap: () {
-                      Get.to(() => const LoginPage());
+                      Get.offAll(() => const LoginPage());
                     },
                     child: ReusableText(
                       text: "Login",
@@ -146,6 +148,20 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 CustomButton(
                   onTap: () {
                     loginNotifier.firstTime = !loginNotifier.firstTime;
+                    if (signupNotifier.validateAndSave()) {
+                      SignupModel model = SignupModel(
+                        username: name.text, 
+                        email: email.text, 
+                        password: password.text);
+            
+                        signupNotifier.upSignup(model);
+                    } else {
+                      Get.snackbar(
+                          "Sign up Failed", "Please check your credentials",
+                          colorText: Color(kLight.value),
+                          backgroundColor: Colors.red,
+                          icon: const Icon(Icons.add_alert));
+                    }
                   },
                   text: "Sign Up",
                 ),

@@ -1,9 +1,10 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-//import 'package:get/get.dart';
+import 'package:get/get.dart';
 import 'package:job_hub/constants/app_constants.dart';
 import 'package:job_hub/controllers/exports.dart';
+import 'package:job_hub/models/request/auth/profile_update_model.dart';
 import 'package:job_hub/views/common/app_style.dart';
 import 'package:job_hub/views/common/custom_btn.dart';
 import 'package:job_hub/views/common/custom_textfield.dart';
@@ -194,10 +195,10 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                       const HeightSpacer(size: 20),
 
                       Consumer<ImageUploader> (
-                        builder: (context, imageUpload, child) {
+                        builder: (context, imageUploader, child) {
                           return CustomButton(
                             onTap: () {
-                              /*if(imageUpload.imageUrl.isEmpty /*&& imageUpload._imageFile == null*/) {
+                              if(imageUploader.imageFil.isEmpty && imageUploader.imageUrl == null) {
                                 Get.snackbar(
                                   "Image Missing", "Please Upload an image to proceed",
                                   colorText: Color(kLight.value),
@@ -205,8 +206,19 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                                   icon: const Icon(Icons.add_alert)
                                 );
                               } else {
-                                //ProfileUpdateReq model = 
-                              }*/
+                                ProfileUpdateReq model = ProfileUpdateReq(
+                                  location: location.text, 
+                                  phone: phone.text, 
+                                  profile: imageUploader.imageUrl.toString(), 
+                                  skills: [
+                                    skill0.text,
+                                    skill1.text,
+                                    skill2.text,
+                                    skill3.text,
+                                    skill4.text,
+                                  ]);
+                                  loginNotifier.updateProfile(model);
+                              }
                             },
                             text: "Update Profile");
                         }, 
