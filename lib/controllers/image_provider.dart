@@ -1,24 +1,33 @@
+import 'dart:io';
+
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:job_hub/constants/app_constants.dart';
+import 'package:uuid/uuid.dart';
 
 class ImageUploader extends ChangeNotifier {
+  var uuid = Uuid();
   final ImagePicker _picker = ImagePicker();
 
-  List<String> imageUrl = [];
+  String? imageUrl;
+  String? imagePath;
+
+  List<String> imageFil = [];
 
   void pickImage() async {
-
     // ignore: no_leading_underscores_for_local_identifiers
     XFile? _imageFile = await _picker.pickImage(source: ImageSource.gallery);
 
-    if(_imageFile != null) {
+    if (_imageFile != null) {
       // Crop the image
 
       _imageFile = await cropImage(_imageFile);
-      if(_imageFile != null) {
-        imageUrl.add(_imageFile.path);
+      if (_imageFile != null) {
+        imageFil.add(_imageFile.path);
+        imageUpload(_imageFile);
+        imagePath = _imageFile.path;
       } else {
         return;
       }
@@ -29,25 +38,25 @@ class ImageUploader extends ChangeNotifier {
     // Crop the image using image_cropper package
     CroppedFile? croppedFile = await ImageCropper.platform.cropImage(
       sourcePath: imageFile.path,
-      maxWidth: 1080,
-      maxHeight: 1920,
-      compressQuality: 80,
-      aspectRatioPresets: [CropAspectRatioPreset.ratio4x3],
+      maxWidth: 600,
+      maxHeight: 800,
+      compressQuality: 70,
+      cropStyle: CropStyle.rectangle,
+      aspectRatioPresets: [CropAspectRatioPreset.ratio5x4],
       uiSettings: [
         AndroidUiSettings(
-          toolbarTitle: 'Jobhub Cropper',
-          toolbarColor: Color(kLightBlue.value),
-          toolbarWidgetColor: Colors.white,
-          initAspectRatio: CropAspectRatioPreset.ratio4x3,
-          lockAspectRatio: true
-        ),
+            toolbarTitle: 'JobHub Cropper',
+            toolbarColor: Color(kLightBlue.value),
+            toolbarWidgetColor: Color(kLight.value),
+            initAspectRatio: CropAspectRatioPreset.ratio5x4,
+            lockAspectRatio: true),
         IOSUiSettings(
-          title: 'Cropper',
+          title: 'JobHub Cropper',
         ),
       ],
     );
 
-    if(croppedFile != null) {
+    if (croppedFile != null) {
       notifyListeners();
       return XFile(croppedFile.path);
     } else {
@@ -55,10 +64,15 @@ class ImageUploader extends ChangeNotifier {
     }
   }
 
-  //  imageUpload() async {
-  //   final ref =
-  //       FirebaseStorage.instance.ref().child('jobhub').child('${uid}jpg');
-  //   await ref.putFile(imageUrl[0]);
-  //   imageUrl = await ref.getDownloadURL();
-  // }
+  Future<String?> imageUpload(XFile upload) async {
+    File image = File(upload.path);
+    final ref = FirebaseStorage.instance
+        .ref()
+        .child("jobhub")
+        .child("${uuid.v1()}.jpg");
+    await ref.putFile(image);
+    imageUrl = await ref.getDownloadURL();
+    print(imageUrl);
+    return imageUrl;
+  }
 }

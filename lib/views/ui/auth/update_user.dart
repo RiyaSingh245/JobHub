@@ -58,7 +58,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                       style: appstyle(35, Color(kDark.value), FontWeight.bold),),
                       Consumer<ImageUploader>(
                         builder: (context, imageUploader, child) {
-                          return imageUploader.imageUrl.isEmpty
+                          return imageUploader.imageFil.isEmpty
                               ? GestureDetector(
                                 onTap: () {
                                   imageUploader.pickImage();
@@ -73,12 +73,12 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                               )
                               : GestureDetector(
                                 onTap: () {
-                                  imageUploader.imageUrl.clear();
+                                  imageUploader.imageFil.clear();
                                   setState(() {});
                                 },
                                 child: CircleAvatar(
                                   backgroundColor: Color(kLightBlue.value),
-                                  backgroundImage: FileImage(File(imageUploader.imageUrl[0])),
+                                  backgroundImage: FileImage(File(imageUploader.imageFil[0])),
                                 ),
                               );
                         },
