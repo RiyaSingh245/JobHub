@@ -49,22 +49,24 @@ class LoginNotifier extends ChangeNotifier {
 
   bool validateAndSave() {
     final form = loginFormKey.currentState;
-    if(form!.validate()) {
+    /*if(form!.validate()) {
       form.save();
       return true;
     } else {
       return false;
-    }
+    }*/
+    return form!.validate();
   }
 
   bool profileValidation() {
     final form = profileFormKey.currentState;
-    if(form!.validate()) {
+    /*if(form!.validate()) {
       form.save();
       return true;
     } else {
       return false;
-    }
+    }*/
+    return form!.validate();
   }
 
   userLogin(LoginModel model) {

@@ -20,17 +20,18 @@ class SignUpNotifier extends ChangeNotifier {
     return regex.hasMatch(password);
   }
 
-  final signupFormKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> signupFormKey = GlobalKey<FormState>();
 
   bool validateAndSave() {
     final form = signupFormKey.currentState;
 
-    if(form!.validate()) {
+    /*if(form!.validate()) {
       form.save();
       return true;
     } else {
       return false;
-    }
+    }*/
+    return form!.validate();
   }
 
   upSignup(SignupModel model) {

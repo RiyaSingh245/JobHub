@@ -56,116 +56,119 @@ class _RegistrationPageState extends State<RegistrationPage> {
               )),
           body: Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w),
-            child: ListView(
-              padding: EdgeInsets.zero,
-              children: [
-                const HeightSpacer(size: 50),
-                ReusableText(
-                  text: "Hello, Welcome!",
-                  style: appstyle(
-                    30,
-                    Color(kDark.value),
-                    FontWeight.w600,
-                  ),
-                ),
-                ReusableText(
-                  text: "Fill the details to sign up to an account",
-                  style: appstyle(
-                    16,
-                    Color(kDarkGrey.value),
-                    FontWeight.w600,
-                  ),
-                ),
-                const HeightSpacer(size: 50),
-                CustomTextField(
-                  controller: name,
-                  hintText: "Full Name",
-                  keyboardType: TextInputType.text,
-                  validator: (name) {
-                    if (name!.isEmpty) {
-                      return "Please enter your  name";
-                    } else {
-                      return null;
-                    }
-                  },
-                ),
-                const HeightSpacer(size: 20),
-                CustomTextField(
-                  controller: email,
-                  hintText: "Email",
-                  keyboardType: TextInputType.emailAddress,
-                  validator: (email) {
-                    if (email!.isEmpty || !email.contains("@")) {
-                      return "Please enter a valid email";
-                    } else {
-                      return null;
-                    }
-                  },
-                ),
-                const HeightSpacer(size: 20),
-                CustomTextField(
-                  controller: password,
-                  hintText: "Password",
-                  keyboardType: TextInputType.text,
-                  obscureText: signupNotifier.obscureText,
-                  validator: (password) {
-                    if (password!.isEmpty || password.length < 8) {
-                      return "Please enter a valid password with at least one uppercase, one lowercase, one digit and a special character and length of characters atleast 8";
-                    }
-                    return null;
-                  },
-                  suffixIcon: GestureDetector(
-                    onTap: () {
-                      signupNotifier.obscureText =
-                          !signupNotifier.obscureText;
-                    },
-                    child: Icon(
-                      signupNotifier.obscureText
-                          ? Icons.visibility
-                          : Icons.visibility_off,
-                      color: Color(kDark.value),
+            child: Form(
+              key: signupNotifier.signupFormKey,
+              child: ListView(
+                padding: EdgeInsets.zero,
+                children: [
+                  const HeightSpacer(size: 50),
+                  ReusableText(
+                    text: "Hello, Welcome!",
+                    style: appstyle(
+                      30,
+                      Color(kDark.value),
+                      FontWeight.w600,
                     ),
                   ),
-                ),
-                const HeightSpacer(size: 10),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: GestureDetector(
-                    onTap: () {
-                      Get.offAll(() => const LoginPage());
+                  ReusableText(
+                    text: "Fill the details to sign up to an account",
+                    style: appstyle(
+                      16,
+                      Color(kDarkGrey.value),
+                      FontWeight.w600,
+                    ),
+                  ),
+                  const HeightSpacer(size: 50),
+                  CustomTextField(
+                    controller: name,
+                    hintText: "Full Name",
+                    keyboardType: TextInputType.text,
+                    validator: (name) {
+                      if (name!.isEmpty) {
+                        return "Please enter your  name";
+                      } else {
+                        return null;
+                      }
                     },
-                    child: ReusableText(
-                      text: "Login",
-                      style: appstyle(
-                        14,
-                        Color(kDark.value),
-                        FontWeight.w500,
+                  ),
+                  const HeightSpacer(size: 20),
+                  CustomTextField(
+                    controller: email,
+                    hintText: "Email",
+                    keyboardType: TextInputType.emailAddress,
+                    validator: (email) {
+                      if (email!.isEmpty || !email.contains("@")) {
+                        return "Please enter a valid email";
+                      } else {
+                        return null;
+                      }
+                    },
+                  ),
+                  const HeightSpacer(size: 20),
+                  CustomTextField(
+                    controller: password,
+                    hintText: "Password",
+                    keyboardType: TextInputType.text,
+                    obscureText: signupNotifier.obscureText,
+                    validator: (password) {
+                      if (password!.isEmpty || password.length < 8) {
+                        return "Please enter a valid password with at least one uppercase, one lowercase, one digit and a special character and length of characters atleast 8";
+                      }
+                      return null;
+                    },
+                    suffixIcon: GestureDetector(
+                      onTap: () {
+                        signupNotifier.obscureText =
+                            !signupNotifier.obscureText;
+                      },
+                      child: Icon(
+                        signupNotifier.obscureText
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                        color: Color(kDark.value),
                       ),
                     ),
                   ),
-                ),
-                const HeightSpacer(size: 50),
-                CustomButton(
-                  onTap: () {
-                    loginNotifier.firstTime = !loginNotifier.firstTime;
-                    if (signupNotifier.validateAndSave()) {
-                      SignupModel model = SignupModel(
-                        username: name.text, 
-                        email: email.text, 
-                        password: password.text);
-            
-                        signupNotifier.upSignup(model);
-                    } else {
-                      Get.snackbar(
-                          "Sign up Failed", "Please check your credentials",
-                          colorText: Color(kLight.value),
-                          backgroundColor: Colors.red,
-                          icon: const Icon(Icons.add_alert));
-                    }
-                  },
-                  text: "Sign Up",
-                ),
-              ],
+                  const HeightSpacer(size: 10),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: GestureDetector(
+                      onTap: () {
+                        Get.offAll(() => const LoginPage());
+                      },
+                      child: ReusableText(
+                        text: "Login",
+                        style: appstyle(
+                          14,
+                          Color(kDark.value),
+                          FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const HeightSpacer(size: 50),
+                  CustomButton(
+                    onTap: () {
+                      loginNotifier.firstTime = !loginNotifier.firstTime;
+                      if (signupNotifier.validateAndSave()) {
+                        SignupModel model = SignupModel(
+                          username: name.text, 
+                          email: email.text, 
+                          password: password.text);
+              
+                          signupNotifier.upSignup(model);
+                      } else {
+                        Get.snackbar(
+                            "Sign up Failed", "Please check your credentials",
+                            colorText: Color(kLight.value),
+                            backgroundColor: Colors.red,
+                            icon: const Icon(Icons.add_alert));
+                      }
+                    },
+                    text: "Sign Up",
+                  ),
+                ],
+              ),
             ),
           ),
         );
