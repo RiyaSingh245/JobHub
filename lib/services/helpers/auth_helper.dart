@@ -98,7 +98,6 @@ class AuthHelper {
       url, 
       headers: requestHeaders,
     );
-    print("API Response: ${response.body}");
 
     if(response.statusCode == 200) {
       var profile = profileResFromJson(response.body);

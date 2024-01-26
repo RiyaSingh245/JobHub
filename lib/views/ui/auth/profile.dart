@@ -207,10 +207,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                     height: 20.h,
                                   ),
                                   const WidthSpacer(width: 15),
-                                  /*ReusableText(
+                                  ReusableText(
                                       text: UserData.phone ?? "+91",
                                       style: appstyle(16, Color(kDark.value),
-                                          FontWeight.w600)),*/
+                                          FontWeight.w600)),
                                 ],
                               ),
                             ),

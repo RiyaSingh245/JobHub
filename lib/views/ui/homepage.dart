@@ -12,6 +12,7 @@ import 'package:job_hub/views/common/search.dart';
 import 'package:job_hub/views/common/vertical_shimmer.dart';
 import 'package:job_hub/views/common/vertical_tile.dart';
 import 'package:job_hub/views/ui/jobs/job_page.dart';
+import 'package:job_hub/views/ui/jobs/jobs_list.dart';
 import 'package:job_hub/views/ui/jobs/widgets/horizontal_shimmer.dart';
 import 'package:job_hub/views/ui/jobs/widgets/horizontal_tile.dart';
 import 'package:job_hub/views/ui/search/searchpage.dart';
@@ -70,7 +71,9 @@ class _HomePageState extends State<HomePage> {
                 const HeightSpacer(size: 30),
                 HeadingWidget(
                   text: "Popular Jobs",
-                  onTap: () {},
+                  onTap: () {
+                    Get.to(() => const JobListPage());
+                  },
                 ),
                 const HeightSpacer(size: 15),
                 SizedBox(
@@ -92,9 +95,9 @@ class _HomePageState extends State<HomePage> {
                                   final job = jobs[index];
                                   return JobHorizontalTile(
                                     onTap: () {
-                                      Get.to(() => const JobPage(
-                                            title: 'Facebook',
-                                            id: '12',
+                                      Get.to(() => JobPage(
+                                            title: job.company,
+                                            id: job.id,
                                           ));
                                     }, job: job,
                                   );
@@ -118,6 +121,9 @@ class _HomePageState extends State<HomePage> {
                           } else {
                             final jobs = snapshot.data;
                             return VerticalTile(
+                              onTap: () {
+                                
+                              },
                               job: jobs
                             );
                           }
