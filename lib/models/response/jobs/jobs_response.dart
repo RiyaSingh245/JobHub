@@ -8,7 +8,7 @@ class JobsResponse {
         required this.title,
         required this.location,
         required this.company,
-        required this.hiring,
+        this.hiring,
         required this.description,
         required this.salary,
         required this.period,
@@ -24,7 +24,7 @@ class JobsResponse {
     final String title;
     final String location;
     final String company;
-    final bool hiring;
+    final bool? hiring;
     final String description;
     final String salary;
     final String period;

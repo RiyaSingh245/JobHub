@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:job_hub/constants/app_constants.dart';
 import 'package:job_hub/controllers/exports.dart';
 import 'package:job_hub/models/response/auth/profile_model.dart';
@@ -52,6 +51,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     return Text("Error ${snapshot.error}");
                   } else {
                     final UserData = snapshot.data;
+                    print("UserData: $UserData");
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       child: ListView(
@@ -95,7 +95,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                         ),
                                         const WidthSpacer(width: 5),
                                         ReusableText(
-                                          text: UserData.location,
+                                          text: UserData.location??"India",
                                           style: appstyle(
                                               16,
                                               Color(kDarkGrey.value),
@@ -207,10 +207,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                     height: 20.h,
                                   ),
                                   const WidthSpacer(width: 15),
-                                  ReusableText(
-                                      text: UserData.phone,
+                                  /*ReusableText(
+                                      text: UserData.phone ?? "+91",
                                       style: appstyle(16, Color(kDark.value),
-                                          FontWeight.w600)),
+                                          FontWeight.w600)),*/
                                 ],
                               ),
                             ),
