@@ -33,12 +33,15 @@ class JobListPage extends StatelessWidget {
               return Text("Error ${snapshot.error}");
             } else {
               final job = snapshot.data;
-              return ListView.builder(
-                itemCount: job!.length,
-                itemBuilder: (context, index) {
-                  final jobs = job[index];
-                  return VerticalTileWidget();
-                },
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                child: ListView.builder(
+                  itemCount: job!.length,
+                  itemBuilder: (context, index) {
+                    final jobs = job[index];
+                    return VerticalTileWidget(job: jobs,);
+                  },
+                ),
               );
             }
           }),

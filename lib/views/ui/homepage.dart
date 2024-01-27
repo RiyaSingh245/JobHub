@@ -122,7 +122,7 @@ class _HomePageState extends State<HomePage> {
                             final jobs = snapshot.data;
                             return VerticalTile(
                               onTap: () {
-                                
+                                Get.to(() => JobPage(title: jobs!.company, id: jobs.id));
                               },
                               job: jobs
                             );
