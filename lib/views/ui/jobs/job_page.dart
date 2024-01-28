@@ -5,6 +5,7 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
 import 'package:job_hub/constants/app_constants.dart';
 import 'package:job_hub/controllers/exports.dart';
+import 'package:job_hub/models/request/bookmarks/bookmarks_model.dart';
 import 'package:job_hub/views/common/app_bar.dart';
 import 'package:job_hub/views/common/app_style.dart';
 import 'package:job_hub/views/common/custom_outline_btn.dart';
@@ -33,11 +34,23 @@ class _JobPageState extends State<JobPage> {
           preferredSize: Size.fromHeight(50.h),
           child: CustomAppBar(
               text: widget.title,
-              actions: const [
-                Padding(
-                  padding: EdgeInsets.only(right: 12.0),
-                  child: Icon(Entypo.bookmark),
+              actions:  [
+                Consumer<BookMarkNotifier>(
+                  builder: (context, bookMarkNotifier, child) {
+                    bookMarkNotifier.loadJobs();
+                    return GestureDetector(
+                        onTap: () {
+                          BookmarkReqResModel model = BookmarkReqResModel(job: widget.id);
+                          bookMarkNotifier.addBookMark(model, widget.id);
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 12.0),
+                          child: !bookMarkNotifier.jobs.contains(widget.id) ? const Icon(Fontisto.bookmark) : const Icon(Fontisto.bookmark_alt),
+                        ),
+                );
+                  }
                 ),
+
               ],
               child: GestureDetector(
                 onTap: () => Get.back(),
