@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:job_hub/controllers/bookmark_provider.dart';
+import 'package:job_hub/models/response/bookmarks/all_bookmarks.dart';
 import 'package:job_hub/views/common/app_bar.dart';
 import 'package:job_hub/views/common/drawer/drawer_widget.dart';
+import 'package:job_hub/views/ui/bookmarks/widgets/bookmark_widget.dart';
+import 'package:provider/provider.dart';
 
 class BookMarkPage extends StatefulWidget {
   const BookMarkPage({super.key});
@@ -22,6 +26,28 @@ class _BookMarkPageState extends State<BookMarkPage> {
         child: const DrawerWidget(),
       ),),
       ),
+      body: Consumer<BookMarkNotifier> (
+        builder: (context, bookMarkNotifier, child) {
+          bookMarkNotifier.getBookmarks();
+          return FutureBuilder<List<AllBookmark>>(
+                        future: bookMarkNotifier.bookmarks,
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState == ConnectionState.waiting) {
+                            return const Center(child: CircularProgressIndicator());
+                          } else if (snapshot.hasError) {
+                            return Text("Error ${snapshot.error}");
+                          } else {
+                            final bookmarks = snapshot.data;
+                            return ListView.builder(
+                                itemCount: bookmarks!.length,
+                                scrollDirection: Axis.vertical,
+                                itemBuilder: (context, index) {
+                                  final bookmark = bookmarks[index];
+                                  return BookMarkTileWidget(bookmark: bookmark);
+                                });
+                          }
+                        });
+        }),
     );
   }
 }
