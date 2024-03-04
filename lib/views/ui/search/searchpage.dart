@@ -4,8 +4,7 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:job_hub/constants/app_constants.dart';
 import 'package:job_hub/models/response/jobs/jobs_response.dart';
 import 'package:job_hub/services/helpers/jobs_helper.dart';
-import 'package:job_hub/views/common/app_style.dart';
-import 'package:job_hub/views/common/reusable_text.dart';
+import 'package:job_hub/views/common/loader.dart';
 import 'package:job_hub/views/ui/jobs/widgets/job_tile.dart';
 import 'package:job_hub/views/ui/search/widgets/custom_field.dart';
 
@@ -70,29 +69,5 @@ class _SearchPageState extends State<SearchPage> {
           )
           : const SearchLoading(text: "Start Searching for Job")
     );
-  }
-}
-
-class SearchLoading extends StatelessWidget {
-
-
-  const SearchLoading({super.key, required this.text});
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-              padding: EdgeInsets.all(20.h),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset("assets/images/optimized_search.png"),
-                  ReusableText(
-                      text: text,
-                      style: appstyle(24, Color(kDark.value), FontWeight.bold)),
-                ],
-              ),
-            );
   }
 }

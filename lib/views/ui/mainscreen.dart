@@ -5,7 +5,7 @@ import 'package:job_hub/controllers/zoom_provider.dart';
 import 'package:job_hub/views/common/drawer/drawerScreen.dart';
 import 'package:job_hub/views/ui/auth/profile.dart';
 import 'package:job_hub/views/ui/bookmarks/bookmarks.dart';
-import 'package:job_hub/views/ui/chat/chatpage.dart';
+import 'package:job_hub/views/ui/chat/chat_list.dart';
 import 'package:job_hub/views/ui/device_mgt/devices_info.dart';
 import 'package:job_hub/views/ui/homepage.dart';
 import 'package:provider/provider.dart';
@@ -45,7 +45,7 @@ class _MainScreenState extends State<MainScreen> {
       case 0:
         return const HomePage();
       case 1:
-        return const ChatsPage();
+        return const ChatsList();
       case 2:
         return const BookMarkPage();  
       case 3:

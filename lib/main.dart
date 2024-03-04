@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:job_hub/constants/app_constants.dart';
-import 'package:job_hub/controllers/exports.dart';
-import 'package:job_hub/controllers/zoom_provider.dart';
 import 'package:job_hub/firebase_options.dart';
 import 'package:job_hub/views/ui/auth/login.dart';
 import 'package:job_hub/views/ui/mainscreen.dart';
 import 'package:provider/provider.dart';
 import 'package:job_hub/views/ui/onboarding/onboarding_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'controllers/exports.dart';
 
 
 Widget defaultHome = const OnBoardingScreen();
@@ -41,6 +41,7 @@ void main() async {
     ChangeNotifierProvider(create: (context) => BookMarkNotifier()),
     ChangeNotifierProvider(create: (context) => ImageUploader()),
     ChangeNotifierProvider(create: (context) => ProfileNotifier()),
+    ChangeNotifierProvider(create: (context) => ChatNotifier()),
   ], child: const MyApp()));
 }
 

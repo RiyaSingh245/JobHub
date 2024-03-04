@@ -5,4 +5,5 @@ export 'package:job_hub/controllers/login_provider.dart';
 export 'package:job_hub/controllers/onboarding_provider.dart';
 export 'package:job_hub/controllers/profile_provider.dart';
 export 'package:job_hub/controllers/signup_provider.dart';
-//import 'package:job_hub/controllers/zoom_provider.dart';
+export 'package:job_hub/controllers/zoom_provider.dart';
+export 'package:job_hub/controllers/chat_provider.dart';

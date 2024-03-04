@@ -20,10 +20,9 @@ class ImageUploader extends ChangeNotifier {
     // ignore: no_leading_underscores_for_local_identifiers
     XFile? _imageFile = await _picker.pickImage(source: ImageSource.gallery);
 
-    if (_imageFile != null) {
-      // Crop the image
+  // Crop the image
+    _imageFile = await cropImage(_imageFile!);
 
-      _imageFile = await cropImage(_imageFile);
       if (_imageFile != null) {
         imageFil.add(_imageFile.path);
         imageUpload(_imageFile);
@@ -31,7 +30,6 @@ class ImageUploader extends ChangeNotifier {
       } else {
         return;
       }
-    }
   }
 
   Future<XFile?> cropImage(XFile imageFile) async {
@@ -72,7 +70,6 @@ class ImageUploader extends ChangeNotifier {
         .child("${uuid.v1()}.jpg");
     await ref.putFile(image);
     imageUrl = await ref.getDownloadURL();
-    print(imageUrl);
     return imageUrl;
   }
 }
