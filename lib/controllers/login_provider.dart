@@ -71,7 +71,7 @@ class LoginNotifier extends ChangeNotifier {
 
   userLogin(LoginModel model) {
     AuthHelper.login(model).then((response) {
-      print(firstTime);
+      //print(firstTime);
       if(response && firstTime) {
         Get.off(() => const PersonalDetails());
       } else if(response && !firstTime) {
