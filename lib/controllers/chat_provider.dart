@@ -7,6 +7,24 @@ import 'package:intl/intl.dart';
 class ChatNotifier extends ChangeNotifier {
 
   late Future<List<GetChats>> chats;
+  List<String> _online = [];
+  bool _typing = false;
+
+  bool get typing => _typing;
+
+  set typingStatus(bool newState) {
+    _typing = newState;
+    notifyListeners();
+  }
+
+  List<String> get online => _online;
+
+  set onlineUsers(List<String> newList) {
+    _online = newList;
+    notifyListeners();
+  }
+
+
   String? userId;
 
   getChats() {

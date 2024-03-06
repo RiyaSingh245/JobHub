@@ -25,12 +25,11 @@ class MessagingHelper {
       body: jsonEncode(model.toJson()),
     );
     
-    //print("Bookmark details :  ${response.body}");
     if(response.statusCode == 200) {
       ReceivedMessages message = ReceivedMessages.fromJson(jsonDecode(response.body));
 
       Map<String, dynamic> responseMap = jsonDecode(response.body);
-      return [true, message];
+      return [true, message, responseMap];
     } else {
       return [false];
     }
